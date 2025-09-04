@@ -4,7 +4,7 @@ const { Types } = require("mongoose");
 // Criar tarefa
 exports.createTask = async (req, res) => {
   try {
-    const { descricao, listaId } = req.body;
+    const { descricao, listaId, prioridade } = req.body;
 
     if (!Types.ObjectId.isValid(listaId)) {
       return res.status(400).json({ error: "listaId inválido" });
@@ -12,8 +12,9 @@ exports.createTask = async (req, res) => {
 
     const task = new Task({
       descricao,
-      listaId,       // string convertida automaticamente
-      userId: req.user.id  // string convertida automaticamente
+      prioridade: prioridade || "média", // se não mandar, vira "média"
+      listaId,
+      userId: req.user.id,
     });
 
     await task.save();
@@ -40,23 +41,25 @@ exports.getTasks = async (req, res) => {
       .populate("listaId", "nome") // popula apenas o campo nome da lista
       .sort({ createdAt: -1 });
 
-    console.log(tasks)
+    console.log(tasks);
     // Retorna tarefas já com listaNome
-    res.json(tasks.map(task => ({
-      _id: task._id,
-      descricao: task.descricao,
-      status: task.status,
-      listaId: task.listaId?._id || null,
-      listaNome: task.listaId?.nome || "Sem lista",
-      createdAt: task.createdAt,
-      updatedAt: task.updatedAt
-    })));
+    res.json(
+      tasks.map((task) => ({
+        _id: task._id,
+        descricao: task.descricao,
+        status: task.status,
+        prioridade: task.prioridade,
+        listaId: task.listaId?._id || null,
+        listaNome: task.listaId?.nome || "Sem lista",
+        createdAt: task.createdAt,
+        updatedAt: task.updatedAt,
+      }))
+    );
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erro ao buscar tarefas" });
   }
 };
-
 
 // Atualizar tarefa
 exports.updateTask = async (req, res) => {
@@ -106,10 +109,19 @@ exports.deleteTask = async (req, res) => {
 exports.getLastTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ userId: req.user.id })
+      .populate("listaId", "nome")
       .sort({ createdAt: -1 })
       .limit(5);
 
-    res.json(tasks);
+    res.json(tasks.map(task => ({
+      _id: task._id,
+      descricao: task.descricao,
+      status: task.status,
+      prioridade: task.prioridade,
+      listaId: task.listaId?._id || null,
+      listaNome: task.listaId?.nome || "Sem lista",
+      createdAt: task.createdAt
+    })));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Erro ao buscar últimas tarefas" });
