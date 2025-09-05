@@ -2,19 +2,36 @@ const Task = require("../models/Task");
 
 exports.getTaskStats = async (req, res) => {
   try {
-    const userIdStr = req.user.id; // string do JWT
+    const userIdStr = req.user.id;
 
-    const stats = await Task.aggregate([
-      {
-        $match: {
-          $expr: { $eq: ["$userId", { $toObjectId: userIdStr }] } // converte string para ObjectId no pipeline
-        }
-      },
+    // Estatísticas por status
+    const statusStats = await Task.aggregate([
+      { $match: { $expr: { $eq: ["$userId", { $toObjectId: userIdStr }] } } },
       { $group: { _id: "$status", total: { $sum: 1 } } }
     ]);
 
-    const result = { iniciada: 0, cancelada: 0, concluída: 0 };
-    stats.forEach(s => { result[s._id] = s.total; });
+    // Estatísticas por prioridade
+    const prioridadeStats = await Task.aggregate([
+      { $match: { $expr: { $eq: ["$userId", { $toObjectId: userIdStr }] } } },
+      { $group: { _id: "$prioridade", total: { $sum: 1 } } }
+    ]);
+
+    const result = {
+      total: 0,
+      statusStats: { iniciada: 0, cancelada: 0, concluída: 0 },
+      prioridadeStats: { baixa: 0, média: 0, alta: 0, urgente: 0 }
+    };
+
+    // Popular status
+    statusStats.forEach(s => {
+      result.statusStats[s._id] = s.total;
+      result.total += s.total;
+    });
+
+    // Popular prioridades
+    prioridadeStats.forEach(p => {
+      result.prioridadeStats[p._id] = p.total;
+    });
 
     res.json(result);
   } catch (error) {

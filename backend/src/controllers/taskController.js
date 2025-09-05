@@ -4,7 +4,7 @@ const { Types } = require("mongoose");
 // Criar tarefa
 exports.createTask = async (req, res) => {
   try {
-    const { descricao, listaId, prioridade } = req.body;
+    const { descricao, listaId, prioridade, status } = req.body;
 
     if (!Types.ObjectId.isValid(listaId)) {
       return res.status(400).json({ error: "listaId inválido" });
@@ -12,9 +12,10 @@ exports.createTask = async (req, res) => {
 
     const task = new Task({
       descricao,
-      prioridade: prioridade || "média", // se não mandar, vira "média"
+      prioridade: prioridade || "média",
+      status: status || "iniciada",
       listaId,
-      userId: req.user.id,
+      userId: req.user.id || req.user._id, // 👈 cobre os dois casos
     });
 
     await task.save();

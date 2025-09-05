@@ -52,31 +52,47 @@ async function carregarTarefas(token) {
   const row = document.createElement("div");
   row.className = "row g-3";
 
-  const coresStatus = { iniciada: "primary", cancelada: "danger", concluída: "success" };
-  const coresPrioridade = { baixa: "secondary", média: "warning", alta: "danger", urgente: "dark" };
+  // cores suaves, mesmo tema dos stats
+  const coresStatus = { iniciada: "#6c757d", cancelada: "#dc3545", concluída: "#198754" };
+  const coresPrioridade = { baixa: "#adb5bd", média: "#ffc107", alta: "#fd7e14", urgente: "#6f42c1" };
 
   tarefas.forEach((tarefa) => {
-    // corrige o _id se vier como { $oid: ... }
-    const id = tarefa._id.$oid || tarefa._id;
+    const id = tarefa._id?.$oid || tarefa._id;
 
     const col = document.createElement("div");
     col.className = "col-md-6 col-lg-4";
     col.setAttribute("data-id", id);
 
     col.innerHTML = `
-      <div class="card shadow-sm h-100">
+      <div style="
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        height: 100%;
+        cursor: pointer;
+      " class="card h-100">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title mb-2">${tarefa.descricao}</h5>
-          <p class="mb-1">
-            <span class="badge badge-status bg-${coresStatus[tarefa.status] || "secondary"}">
+          <div class="mb-2 d-flex gap-2 flex-wrap">
+            <span style="
+              background-color: ${coresStatus[tarefa.status] || "#6c757d"};
+              color: white;
+              padding: 3px 10px;
+              border-radius: 8px;
+              font-size: 0.85rem;
+            ">
               ${tarefa.status}
             </span>
-            <span class="badge badge-prioridade bg-${
-              coresPrioridade[tarefa.prioridade || "média"]
-            } ms-1">
+            <span style="
+              background-color: ${coresPrioridade[tarefa.prioridade || "média"] || "#ffc107"};
+              color: white;
+              padding: 3px 10px;
+              border-radius: 8px;
+              font-size: 0.85rem;
+            ">
               ${tarefa.prioridade || "média"}
             </span>
-          </p>
+          </div>
           <p class="text-muted mb-1">
             <small>Lista: ${tarefa.listaNome || "Sem lista"}</small>
           </p>
@@ -100,32 +116,90 @@ async function carregarStats(token) {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error("Erro ao buscar stats");
-  const stats = await res.json();
 
-  const coresStatus = { iniciada: "primary", cancelada: "danger", concluída: "success" };
+  const { total, statusStats, prioridadeStats } = await res.json();
+
+  const coresStatus = { iniciada: "#6c757d", cancelada: "#dc3545", concluída: "#198754" };
+  const coresPrioridade = { baixa: "#adb5bd", média: "#ffc107", alta: "#fd7e14", urgente: "#6f42c1" };
+
   const container = document.getElementById("grafico-container");
   if (!container) return;
   container.innerHTML = "";
 
-  const row = document.createElement("div");
-  row.className = "row g-4";
+  // === CARD TOTAL ===
+  const totalCard = document.createElement("div");
+  totalCard.className = "mb-4 text-center";
+  totalCard.innerHTML = `
+    <div style="
+      background-color: #f8f9fa; 
+      padding: 20px; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    ">
+      <h4>Total de Tarefas</h4>
+      <p style="font-size: 2rem; font-weight: bold; margin: 0;">${total}</p>
+    </div>
+  `;
+  container.appendChild(totalCard);
 
-  Object.entries(stats).forEach(([status, valor]) => {
-    const col = document.createElement("div");
-    col.className = "col-md-4";
-    col.innerHTML = `
-      <div class="card text-white bg-${coresStatus[status] || "secondary"} mb-3">
-        <div class="card-body">
-          <h5 class="card-title text-capitalize">${status}</h5>
-          <p class="card-text">${valor} tarefa${valor !== 1 ? "s" : ""}</p>
-        </div>
-      </div>
+  // === STATUS ===
+  const statusTitle = document.createElement("h5");
+  statusTitle.textContent = "Por Status";
+  statusTitle.className = "mt-4 mb-2";
+  container.appendChild(statusTitle);
+
+  const rowStatus = document.createElement("div");
+  rowStatus.className = "d-flex flex-wrap gap-3 mb-4";
+
+  Object.entries(statusStats).forEach(([status, valor]) => {
+    const card = document.createElement("div");
+    card.style = `
+      flex: 1 1 150px; 
+      background-color: ${coresStatus[status]}; 
+      color: white; 
+      padding: 15px; 
+      border-radius: 12px; 
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     `;
-    row.appendChild(col);
+    card.innerHTML = `
+      <h6 class="text-capitalize mb-1">${status}</h6>
+      <p style="font-size: 1.5rem; font-weight: bold; margin: 0;">${valor}</p>
+    `;
+    rowStatus.appendChild(card);
   });
+  container.appendChild(rowStatus);
 
-  container.appendChild(row);
+  // === PRIORIDADES ===
+  const prioridadeTitle = document.createElement("h5");
+  prioridadeTitle.textContent = "Por Prioridade";
+  prioridadeTitle.className = "mt-4 mb-2";
+  container.appendChild(prioridadeTitle);
+
+  const rowPrioridade = document.createElement("div");
+  rowPrioridade.className = "d-flex flex-wrap gap-3 mb-4";
+
+  Object.entries(prioridadeStats).forEach(([prioridade, valor]) => {
+    const card = document.createElement("div");
+    card.style = `
+      flex: 1 1 150px; 
+      background-color: ${coresPrioridade[prioridade]}; 
+      color: white; 
+      padding: 15px; 
+      border-radius: 12px; 
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    `;
+    card.innerHTML = `
+      <h6 class="text-capitalize mb-1">${prioridade}</h6>
+      <p style="font-size: 1.5rem; font-weight: bold; margin: 0;">${valor}</p>
+    `;
+    rowPrioridade.appendChild(card);
+  });
+  container.appendChild(rowPrioridade);
 }
+
+
 
 // --- MODAL ---
 function abrirModal(tarefa) {

@@ -27,6 +27,7 @@ document.getElementById("form-login").addEventListener("submit", async (e) => {
         JSON.stringify({
           nome: data.nome,
           foto: data.foto,
+          email: email
         })
       );
       alert(`Bem-vindo, ${data.nome}!`);
