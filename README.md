@@ -37,7 +37,7 @@ Projeto dividido em **Backend (API Node.js + MongoDB)** e **Frontend (HTML, CSS,
 ---
 
 ## 📂 Estrutura do Projeto
-
+```
 📁 projeto-taskly
 ┣ 📁 backend
 ┃ ┣ 📁 routes # Rotas da API (auth, tasks, lists, stats, users)
@@ -54,7 +54,7 @@ Projeto dividido em **Backend (API Node.js + MongoDB)** e **Frontend (HTML, CSS,
 ┃ ┣ home.html # Dashboard principal
 ┃ ┗ listas.html # Página com tarefas organizadas
 ┗ README.md
-
+```
 
 ---
 
@@ -85,7 +85,7 @@ JWT_SECRET=umsegurosegredo
 Inicie o servidor:
 
 npm start
-
+```
 
 Servidor rodando em: http://localhost:4000
 
