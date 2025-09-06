@@ -60,36 +60,31 @@ Projeto dividido em **Backend (API Node.js + MongoDB)** e **Frontend (HTML, CSS,
 
 ## ⚙️ Como Rodar o Projeto
 
-### 🔸 1. Clonar o repositório
+### 🔸 1. conectar ao MongoDB
+
+### 🔸 2. Crie um arquivo .env dentro de backend/ com:
+
+    PORT=4000
+    MONGO_URI=sua_string_de_conexao_mongodb
+    JWT_SECRET=umsegurosegredo
+
+### 🔸 3. Clonar o repositório
 ```bash
 git clone https://github.com/seu-usuario/taskly.git
-cd taskly
-
-conectar ao MongoDB
-
+cd ada_globo_html_css_js
+```
+### 🔸 4. Configurar o Backend
+```
 cd backend
 npm install
-
-🔸 2. Configurar o Backend
-cd backend
-npm install
-
-
-Crie um arquivo .env dentro de backend/ com:
-
-PORT=4000
-MONGO_URI=sua_string_de_conexao_mongodb
-JWT_SECRET=umsegurosegredo
-
-
-Inicie o servidor:
-
+```
+### 🔸 5. Inicie o servidor:
+```
 npm start
 ```
-
 Servidor rodando em: http://localhost:4000
 
-🔸 3. Rodar o Frontend
+### 🔸 6. Rodar o Frontend
 
 Basta abrir o arquivo frontend/index.html no navegador.
 (ou servir com extensão Live Server no VSCode para facilitar).
@@ -99,6 +94,7 @@ Basta abrir o arquivo frontend/index.html no navegador.
 ✅ Cadastro e login de usuários com foto
 ✅ Autenticação via JWT
 ✅ CRUD de tarefas (criar, listar, atualizar, excluir)
+✅ Filtro por tipo de tarefa
 ✅ Organização em listas
 ✅ Dashboard com estatísticas em cards
 ✅ Modal de edição rápida das tarefas
