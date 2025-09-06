@@ -5,19 +5,32 @@ const User = require("../models/User");
 exports.register = async (req, res) => {
   try {
     const { nome, email, senha, foto } = req.body;
+
+    if (!nome || !email || !senha) {
+      return res.status(400).json({ error: "Nome, email e senha são obrigatórios" });
+    }
+
     const hashedPassword = await bcrypt.hash(senha, 10);
 
-    const newUser = new User({ nome, email, senha: hashedPassword, foto });
-    await newUser.save();
+    const newUser = new User({
+      nome,
+      email,
+      senha: hashedPassword,
+      foto: foto || "", // base64 da foto
+    });
 
-    const users = await User.find();
-    console.log("Usuários no banco:", users);
+    await newUser.save();
 
     res.status(201).json({ message: "Usuário criado com sucesso!" });
   } catch (error) {
+    console.error(error);
+    if (error.code === 11000) {
+      return res.status(400).json({ error: "Email já cadastrado" });
+    }
     res.status(500).json({ error: "Erro ao registrar usuário" });
   }
 };
+
 
 // exports.login = async (req, res) => {
 //   try {

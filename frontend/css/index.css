@@ -1,0 +1,47 @@
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(203, 163, 240);
+  width: 70%;
+  margin: auto;
+}
+#logo {
+  display: flex;
+}
+
+#logo img {
+  width: 25%;
+  margin: auto;
+}
+
+.branco {
+  color: white;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+body {
+  background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
+}
+
+.btn {
+  background-color: aquamarine;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgb(146, 212, 190);
+}
+
+@media (max-width: 768px) {
+  #logo img {
+    width: 50%;
+  }
+}

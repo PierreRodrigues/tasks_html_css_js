@@ -1,0 +1,211 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
+  background-attachment: fixed;
+}
+
+#grafico-container {
+  width: 100%;
+}
+
+.link-nav {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: #007bff;
+}
+
+#graficoTarefas {
+  max-width: 100%;
+  height: 250px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+#ul-nav {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+#ul-nav li {
+  padding-left: 30px;
+}
+
+.container {
+  margin-bottom: 100px;
+}
+
+#ultimas-tarefas {
+  list-style: none;
+  padding: 0;
+}
+
+#ultimas-tarefas li {
+  background: #fff;
+  margin-bottom: 8px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card:hover {
+  background-color: rgb(218, 197, 238);
+  transform: scale(1.02);
+  transition: transform 0.2s;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* === MEDIA QUERIES PARA DRAWER === */
+/* Navbar drawer */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
+  background-attachment: fixed;
+}
+
+.link-nav {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link-nav:hover {
+  color: #0a6eda;
+}
+.tab-button {
+  background: #eee;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.tab-button.active {
+  border-color: #6f42c1;
+  background: #6f42c1;
+  color: white;
+}
+#tarefas-container {
+  display: none;
+}
+.card:hover {
+  background-color: rgb(218, 197, 238);
+  transform: scale(1.02);
+  transition: transform 0.2s;
+}
+
+#btn-nova-lista,
+#btn-nova-tarefa,
+.btn-add,
+.btn-cancel {
+  background-color: rgb(214, 108, 200);
+  border: none;
+  color: white;
+}
+
+#btn-nova-lista:hover,
+#btn-nova-tarefa:hover,
+.btn-add:hover,
+.btn-cancel:hover {
+  background-color: rgb(179, 97, 158);
+  color: white;
+}
+
+.btnLogout {
+  width: 100%;
+}
+
+#cards-tarefas {
+  margin-bottom: 100px;
+}
+@media (max-width: 991.98px) {
+  /* Ícone do drawer */
+  .navbar-toggler {
+    border-color: #007bff;
+    /* background-color: #007bff; */
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(0,123,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+
+  #navbarNav {
+    background-color: #c4d4d4; /* cor desejada */
+  }
+
+  /* Esconder a foto */
+  #user-avatar {
+    display: none !important;
+  }
+
+  /* Links e botões alinhados à direita */
+  #ul-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #ul-nav .nav-item,
+  #ul-nav .dropdown {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 0.5rem;
+  }
+
+  #ul-nav .nav-link {
+    color: #007bff;
+    font-weight: 500;
+  }
+
+  #ul-nav .nav-link:hover {
+    color: #0056b3;
+  }
+
+  #ul-nav .btn-danger {
+    width: auto;
+  }
+  .navbar-brand {
+    width: 40%;
+  }
+  #btnLogoutMobile {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #graficoTarefas {
+    height: 200px;
+  }
+}

@@ -1,0 +1,18 @@
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(203, 163, 240);
+  width: 70%;
+  margin: auto;
+}
+
+.btn {
+  background-color: aquamarine;
+  color: black;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgb(146, 212, 190);
+  color: black;
+}

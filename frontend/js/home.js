@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.href = "/login.html";
+    window.location.href = "index.html";
     return;
   }
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (btnLogout) {
     btnLogout.onclick = () => {
       localStorage.clear();
-      window.location.href = "/login.html";
+      window.location.href = "index.html";
     };
   }
 
@@ -74,24 +74,23 @@ async function carregarTarefas(token) {
         <div class="card-body d-flex flex-column">
           <h5 class="card-title mb-2">${tarefa.descricao}</h5>
           <div class="mb-2 d-flex gap-2 flex-wrap">
-            <span style="
-              background-color: ${coresStatus[tarefa.status] || "#6c757d"};
-              color: white;
-              padding: 3px 10px;
-              border-radius: 8px;
-              font-size: 0.85rem;
-            ">
-              ${tarefa.status}
-            </span>
-            <span style="
-              background-color: ${coresPrioridade[tarefa.prioridade || "média"] || "#ffc107"};
-              color: white;
-              padding: 3px 10px;
-              border-radius: 8px;
-              font-size: 0.85rem;
-            ">
-              ${tarefa.prioridade || "média"}
-            </span>
+            <span class="badge-status" 
+  style="background-color: ${coresStatus[tarefa.status] || "#6c757d"}; 
+         color: white; 
+         padding: 3px 10px; 
+         border-radius: 8px; 
+         font-size: 0.85rem;">
+  ${tarefa.status}
+</span>
+
+<span class="badge-prioridade" 
+  style="background-color: ${coresPrioridade[tarefa.prioridade || "média"] || "#ffc107"}; 
+         color: white; 
+         padding: 3px 10px; 
+         border-radius: 8px; 
+         font-size: 0.85rem;">
+  ${tarefa.prioridade || "média"}
+</span>
           </div>
           <p class="text-muted mb-1">
             <small>Lista: ${tarefa.listaNome || "Sem lista"}</small>

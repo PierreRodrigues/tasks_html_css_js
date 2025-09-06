@@ -12,120 +12,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <style>
-      body {
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
-        background-attachment: fixed;
-      }
-
-      .link-nav {
-        color: #007bff;
-        text-decoration: none;
-      }
-
-      .link-nav:hover {
-        color: #0a6eda;
-      }
-      .tab-button {
-        background: #eee;
-        border: 1px solid #ccc;
-        padding: 8px 12px;
-        margin: 3px;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-      .tab-button.active {
-        border-color: #6f42c1;
-        background: #6f42c1;
-        color: white;
-      }
-      #tarefas-container {
-        display: none;
-      }
-      .card:hover {
-        background-color: rgb(218, 197, 238);
-        transform: scale(1.02);
-        transition: transform 0.2s;
-      }
-
-      #btn-nova-lista,
-      #btn-nova-tarefa,
-      .btn-add,
-      .btn-cancel {
-        background-color: rgb(214, 108, 200);
-        border: none;
-        color: white;
-      }
-
-      #btn-nova-lista:hover,
-      #btn-nova-tarefa:hover,
-      .btn-add:hover,
-      .btn-cancel:hover {
-        background-color: rgb(179, 97, 158);
-        color: white;
-      }
-
-      #cards-tarefas {
-        margin-bottom: 100px;
-      }
-      @media (max-width: 991.98px) {
-        /* Ícone do drawer */
-        .navbar-toggler {
-          border-color: #007bff;
-          /* background-color: #007bff; */
-        }
-
-        .navbar-toggler-icon {
-          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(0,123,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-        }
-
-        #navbarNav {
-          background-color: #c4d4d4; /* cor desejada */
-        }
-
-        /* Esconder a foto */
-        #user-avatar {
-          display: none !important;
-        }
-
-        /* Links e botões alinhados à direita */
-        #ul-nav {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-        }
-
-        #ul-nav .nav-item,
-        #ul-nav .dropdown {
-          width: 100%;
-          text-align: right;
-          margin-bottom: 0.5rem;
-        }
-
-        #ul-nav .nav-link {
-          color: #007bff;
-          font-weight: 500;
-        }
-
-        #ul-nav .nav-link:hover {
-          color: #0056b3;
-        }
-
-        #ul-nav .btn-danger {
-          width: auto;
-        }
-        .navbar-brand {
-          width: 40%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/listas.css">
+    
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <!-- <a class="navbar-brand fw-bold" href="#">📋 Gerenciador de Tarefas</a> -->
         <a class="navbar-brand" href="#">
@@ -144,58 +37,49 @@
             <li class="nav-item me-2">
               <a class="link-nav" href="home.html">Home</a>
             </li>
-            <!-- Navbar já existente -->
-            <ul class="navbar-nav ms-auto align-items-center" id="ul-nav">
-              <!-- <li class="nav-item me-2">
-                <a class="link-nav" href="listas.html">Listas de Tarefas</a>
-              </li> -->
 
-              <li class="nav-item dropdown d-none d-lg-block">
-                <!-- escondido em telas pequenas -->
-                <button
-                  class="btn p-0 border-0 bg-transparent"
-                  id="perfilDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+            <li class="nav-item dropdown d-none d-lg-block">
+              <button
+                class="btn p-0 border-0 bg-transparent"
+                id="perfilDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  id="user-avatar"
+                  src="https://cdn.pixabay.com/photo/2022/08/22/11/04/skate-7403432_960_720.jpg"
+                  alt="Foto do usuário"
+                  class="rounded-circle"
+                  style="width: 50px; height: 50px; object-fit: cover"
+                />
+              </button>
+
+              <div
+                class="dropdown-menu dropdown-menu-end p-3 shadow"
+                aria-labelledby="perfilDropdown"
+                style="width: 250px"
+              >
+                <div class="text-center">
                   <img
-                    id="user-avatar"
-                    src="https://cdn.pixabay.com/photo/2022/08/22/11/04/skate-7403432_960_720.jpg"
-                    alt="Foto do usuário"
-                    class="rounded-circle"
-                    style="width: 50px; height: 50px; object-fit: cover"
+                    id="profile-foto"
+                    src=""
+                    class="rounded-circle mb-3"
+                    style="width: 80px; height: 80px; object-fit: cover"
                   />
-                </button>
-
-                <div
-                  class="dropdown-menu dropdown-menu-end p-3 shadow"
-                  aria-labelledby="perfilDropdown"
-                  style="width: 250px"
-                >
-                  <div class="text-center">
-                    <img
-                      id="profile-foto"
-                      src=""
-                      class="rounded-circle mb-3"
-                      style="width: 80px; height: 80px; object-fit: cover"
-                    />
-                    <h5 id="profile-nome" class="mb-1">Usuário</h5>
-                    <p id="profile-email" class="text-muted mb-3">Email</p>
-                  </div>
-                  <hr />
-                  <button id="btnLogout" class="btn btn-danger w-100">
-                    Sair
-                  </button>
+                  <h5 id="profile-nome" class="mb-1">Usuário</h5>
+                  <p id="profile-email" class="text-muted mb-3">Email</p>
                 </div>
-              </li>
+                <hr />
+                <button id="btnLogout" class="btn btn-danger w-100">Sair</button>
+              </div>
+            </li>
 
-              <!-- Link de logout para mobile (visível apenas em telas pequenas) -->
-              <li class="nav-item d-lg-none mt-2">
-                <button id="btnLogoutMobile" class="btn btn-danger w-100">
-                  Sair
-                </button>
-              </li>
-            </ul>
+            <!-- Logout mobile -->
+            <li class="nav-item d-lg-none mt-2">
+              <button id="btnLogoutMobile" class="btn btn-danger">
+                Sair
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -329,318 +213,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          window.location.href = "/index.html"; // redireciona para login se não tiver token
-          return;
-        }
-
-        // --- USUÁRIO ---
-        const user = JSON.parse(localStorage.getItem("user")); // { nome, foto, email }
-
-        // elementos do card
-        const avatar = document.getElementById("user-avatar");
-        const cardFoto = document.getElementById("profile-foto");
-        const cardNome = document.getElementById("profile-nome");
-        const cardEmail = document.getElementById("profile-email");
-
-        if (avatar && user?.foto) avatar.src = user.foto; // avatar na navbar
-        if (cardFoto && user?.foto) cardFoto.src = user.foto; // foto no card
-        if (cardNome) cardNome.textContent = user?.nome || "Usuário";
-        if (cardEmail)
-          cardEmail.textContent = user?.email || "Email não informado";
-
-        // botão de logout
-        const btnLogout = document.getElementById("btnLogout");
-        if (btnLogout) {
-          btnLogout.onclick = () => {
-            localStorage.clear();
-            window.location.href = "/index.html";
-          };
-        }
-      });
-
-      const token = localStorage.getItem("token");
-      const listaAbas = document.getElementById("lista-abas");
-      const tarefasContainer = document.getElementById("tarefas-container");
-      const nomeLista = document.getElementById("nome-lista");
-      const cardsContainer = document.getElementById("cards-tarefas");
-
-      const btnNovaLista = document.getElementById("btn-nova-lista");
-      const formNovaLista = document.getElementById("form-nova-lista");
-      const inputNovaLista = document.getElementById("nome-nova-lista");
-      const btnCancelarNovaLista = document.getElementById(
-        "cancelar-nova-lista"
-      );
-
-      const btnNovaTarefa = document.getElementById("btn-nova-tarefa");
-      const formNovaTarefa = document.getElementById("form-nova-tarefa");
-      const descricaoInput = document.getElementById("descricao-tarefa");
-      const statusInput = document.getElementById("status-tarefa");
-      const prioridadeInput = document.getElementById("prioridade-tarefa");
-      const btnCancelarNovaTarefa = document.getElementById(
-        "cancelar-nova-tarefa"
-      );
-
-      let listas = [];
-      let tarefas = {};
-      let listaAtual = null;
-      let tarefaEditando = null;
-
-      const modalEdicao = new bootstrap.Modal(
-        document.getElementById("modalEdicao")
-      );
-      const editDescricao = document.getElementById("edit-descricao");
-      const editStatus = document.getElementById("edit-status");
-      const editPrioridade = document.getElementById("edit-prioridade");
-      const formEdicaoTarefa = document.getElementById("form-edicao-tarefa");
-
-      document.getElementById("btnLogout").onclick = () => {
-        localStorage.removeItem("token");
-        window.location.href = "index.html";
-      };
-
-      async function carregarListas() {
-        try {
-          const res = await fetch("http://localhost:4000/lists", {
-            headers: { Authorization: "Bearer " + token },
-          });
-          listas = await res.json();
-          listas.forEach(criarAba);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-
-      function criarAba(lista) {
-        const btn = document.createElement("button");
-        btn.className = "tab-button";
-        btn.textContent = lista.nome;
-        btn.onclick = () => mostrarTarefas(lista);
-        listaAbas.appendChild(btn);
-      }
-
-      async function mostrarTarefas(lista) {
-        listaAtual = lista;
-        tarefasContainer.style.display = "block";
-        nomeLista.textContent = lista.nome;
-
-        document
-          .querySelectorAll(".tab-button")
-          .forEach((btn) => btn.classList.remove("active"));
-        Array.from(listaAbas.children).forEach((btn) => {
-          if (btn.textContent === lista.nome) btn.classList.add("active");
-        });
-
-        try {
-          const res = await fetch(
-            `http://localhost:4000/tasks?listaId=${lista._id}`,
-            {
-              headers: { Authorization: "Bearer " + token },
-            }
-          );
-          const listaTarefas = await res.json();
-          tarefas[lista._id] = listaTarefas || [];
-          renderTarefas();
-        } catch (err) {
-          console.error(err);
-          tarefas[lista._id] = [];
-          renderTarefas();
-        }
-      }
-
-      function renderTarefas() {
-        cardsContainer.innerHTML = "";
-        if (!listaAtual || !tarefas[listaAtual._id]) return;
-
-        // cores suaves para status e prioridade
-        const coresStatus = {
-          iniciada: "#6c757d",
-          concluída: "#198754",
-          cancelada: "#dc3545",
-        };
-        const coresPrioridade = {
-          baixa: "#adb5bd",
-          média: "#ffc107",
-          alta: "#fd7e14",
-          urgente: "#6f42c1",
-        };
-
-        tarefas[listaAtual._id].forEach((tarefa) => {
-          const id = tarefa._id?.$oid || tarefa._id;
-          const col = document.createElement("div");
-          col.className = "col-md-6 col-lg-4";
-          col.setAttribute("data-id", id);
-
-          col.innerHTML = `
-      <div style="
-        background-color: #f8f9fa;
-        border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        height: 100%;
-        cursor: pointer;
-      " class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title mb-2">${tarefa.descricao}</h5>
-          <div class="mb-2 d-flex gap-2 flex-wrap">
-            <span style="
-              background-color: ${coresStatus[tarefa.status] || "#6c757d"};
-              color: white;
-              padding: 3px 10px;
-              border-radius: 8px;
-              font-size: 0.85rem;
-            ">
-              ${tarefa.status}
-            </span>
-            <span style="
-              background-color: ${
-                coresPrioridade[tarefa.prioridade || "média"] || "#ffc107"
-              };
-              color: white;
-              padding: 3px 10px;
-              border-radius: 8px;
-              font-size: 0.85rem;
-            ">
-              ${tarefa.prioridade || "média"}
-            </span>
-          </div>
-          <p class="text-muted mb-1"><small>Lista: ${
-            listaAtual.nome
-          }</small></p>
-          <p class="text-muted mb-0 mt-auto"><small>Criada em: ${new Date(
-            tarefa.createdAt
-          ).toLocaleDateString("pt-BR")}</small></p>
-        </div>
-      </div>
-    `;
-
-          col.querySelector(".card").onclick = () => abrirModalEdicao(tarefa);
-          cardsContainer.appendChild(col);
-        });
-      }
-
-      function abrirModalEdicao(tarefa) {
-        tarefaEditando = tarefa;
-        editDescricao.value = tarefa.descricao;
-        editStatus.value = tarefa.status;
-        editPrioridade.value = tarefa.prioridade || "média";
-        modalEdicao.show();
-      }
-
-      formEdicaoTarefa.onsubmit = async (e) => {
-        e.preventDefault();
-        if (!tarefaEditando) return;
-        try {
-          await fetch(`http://localhost:4000/tasks/${tarefaEditando._id}`, {
-            method: "PUT",
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              descricao: editDescricao.value,
-              status: editStatus.value,
-              prioridade: editPrioridade.value,
-            }),
-          });
-          modalEdicao.hide();
-          mostrarTarefas(listaAtual);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
-      btnNovaLista.onclick = () => (formNovaLista.style.display = "block");
-      btnCancelarNovaLista.onclick = () =>
-        (formNovaLista.style.display = "none");
-
-      formNovaLista.onsubmit = async (e) => {
-        e.preventDefault();
-        const nome = inputNovaLista.value.trim();
-        if (!nome) return;
-        try {
-          const res = await fetch("http://localhost:4000/lists", {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ nome }),
-          });
-          const novaLista = await res.json();
-          listas.push(novaLista);
-          tarefas[novaLista._id] = [];
-          criarAba(novaLista);
-          mostrarTarefas(novaLista);
-          inputNovaLista.value = "";
-          formNovaLista.style.display = "none";
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
-      btnNovaTarefa.onclick = () => (formNovaTarefa.style.display = "block");
-
-      formNovaTarefa.onsubmit = async (e) => {
-        e.preventDefault();
-        const descricao = descricaoInput.value.trim();
-        const status = statusInput.value;
-        const prioridade = prioridadeInput.value;
-        if (!descricao) return;
-        try {
-          await fetch("http://localhost:4000/tasks", {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              descricao,
-              status,
-              prioridade,
-              listaId: listaAtual._id,
-            }),
-          });
-          descricaoInput.value = "";
-          formNovaTarefa.style.display = "none";
-          mostrarTarefas(listaAtual);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
-      btnCancelarNovaTarefa.onclick = () => {
-        formNovaTarefa.style.display = "none";
-        descricaoInput.value = "";
-        statusInput.value = "iniciada";
-        prioridadeInput.value = "média";
-      };
-
-      const btnExcluirTarefa = document.getElementById("btn-excluir-tarefa");
-
-      btnExcluirTarefa.onclick = async () => {
-        if (!tarefaEditando) return;
-
-        if (!confirm("Tem certeza que deseja excluir esta tarefa?")) return;
-
-        try {
-          await fetch(`http://localhost:4000/tasks/${tarefaEditando._id}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          });
-          modalEdicao.hide();
-          mostrarTarefas(listaAtual); // recarrega os cards
-        } catch (err) {
-          console.error(err);
-          alert("Erro ao excluir a tarefa.");
-        }
-      };
-
-      carregarListas();
+    <script src="./js/listas.js">
+      
     </script>
     <!-- <script src="./js/listas.js"></script> -->
   </body>
