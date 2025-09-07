@@ -1,4 +1,4 @@
-# 📋 Taskly - Gerenciador de Tarefas
+# 📋 TidyTasks - Gerenciador de Tarefas
 
 Um sistema completo de gerenciamento de tarefas com **autenticação**, **organização por listas**, **estatísticas visuais** e **cadastro de usuários com foto**.  
 Projeto dividido em **Backend (API Node.js + MongoDB)** e **Frontend (HTML, CSS, JS + Bootstrap 5)**.
