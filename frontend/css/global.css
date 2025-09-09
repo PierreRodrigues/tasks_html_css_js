@@ -57,11 +57,11 @@ body {
   align-items: center;
 }
 
-.card:hover {
+/* .card:hover {
   background-color: rgb(218, 197, 238);
   transform: scale(1.02);
   transition: transform 0.2s;
-}
+} */
 
 .modal-overlay {
   position: fixed;
@@ -119,11 +119,11 @@ body {
 #tarefas-container {
   display: none;
 }
-.card:hover {
+/* .card:hover {
   background-color: rgb(218, 197, 238);
   transform: scale(1.02);
   transition: transform 0.2s;
-}
+} */
 
 #btn-nova-lista,
 #btn-nova-tarefa,

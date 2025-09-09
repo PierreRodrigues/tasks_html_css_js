@@ -90,7 +90,7 @@ Basta abrir o arquivo frontend/index.html no navegador.
 (ou servir com extensão Live Server no VSCode para facilitar).
 
 📊 Funcionalidades
-
+```
 ✅ Cadastro e login de usuários com foto
 ✅ Autenticação via JWT
 ✅ CRUD de tarefas (criar, listar, atualizar, excluir)
@@ -99,7 +99,7 @@ Basta abrir o arquivo frontend/index.html no navegador.
 ✅ Dashboard com estatísticas em cards
 ✅ Modal de edição rápida das tarefas
 ✅ Logout e controle de sessão com LocalStorage
-
+```
 🎯 Próximos Passos (melhorias futuras)
 
  Filtros por status e prioridade

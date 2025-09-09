@@ -6,3 +6,9 @@
     background-color: rgb(179, 97, 158);
     color: white;
 }
+
+.card:hover {
+  background-color: rgb(218, 197, 238);
+  transform: scale(1.02);
+  transition: transform 0.2s;
+}

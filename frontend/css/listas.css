@@ -1,16 +1,27 @@
 #btn-nova-lista,
-      #btn-nova-tarefa,
-      .btn-add,
-      .btn-cancel {
-        background-color: rgb(214, 108, 200);
-        border: none;
-        color: white;
-      }
+#btn-nova-tarefa,
+.btn-add,
+.btn-cancel {
+  background-color: rgb(214, 108, 200);
+  border: none;
+  color: white;
+}
 
-      #btn-nova-lista:hover,
-      #btn-nova-tarefa:hover,
-      .btn-add:hover,
-      .btn-cancel:hover {
-        background-color: rgb(179, 97, 158);
-        color: white;
-      }
+#btn-nova-lista:hover,
+#btn-nova-tarefa:hover,
+.btn-add:hover,
+.btn-cancel:hover {
+  background-color: rgb(179, 97, 158);
+  color: white;
+}
+.card:hover {
+  background-color: rgb(218, 197, 238);
+  transform: scale(1.02);
+  transition: transform 0.2s;
+}
+
+.tab-button {
+  background-color: #f7e1d7;
+  border: 1 solid #6f42c1;
+  border-radius: 8px;
+}
