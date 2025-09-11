@@ -116,19 +116,6 @@ function renderTarefas() {
   cardsContainer.innerHTML = "";
   if (!listaAtual || !tarefas[listaAtual._id]) return;
 
-  // cores suaves para status e prioridade
-  const coresStatus = {
-    iniciada: "#6c757d",
-    concluída: "#198754",
-    cancelada: "#dc3545",
-  };
-  const coresPrioridade = {
-    baixa: "#adb5bd",
-    média: "#ffc107",
-    alta: "#fd7e14",
-    urgente: "#6f42c1",
-  };
-
   tarefas[listaAtual._id].forEach((tarefa) => {
     const id = tarefa._id?.$oid || tarefa._id;
     const col = document.createElement("div");
@@ -136,43 +123,21 @@ function renderTarefas() {
     col.setAttribute("data-id", id);
 
     col.innerHTML = `
-      <div style="
-        background-color: #f8f9fa;
-        border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        height: 100%;
-        cursor: pointer;
-      " class="card h-100">
+      <div class="card card-tarefa h-100">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title mb-2">${tarefa.descricao}</h5>
           <div class="mb-2 d-flex gap-2 flex-wrap">
-            <span style="
-              background-color: ${coresStatus[tarefa.status] || "#6c757d"};
-              color: white;
-              padding: 3px 10px;
-              border-radius: 8px;
-              font-size: 0.85rem;
-            ">
+            <span class="badge-status status-${tarefa.status}">
               ${tarefa.status}
             </span>
-            <span style="
-              background-color: ${
-                coresPrioridade[tarefa.prioridade || "média"] || "#ffc107"
-              };
-              color: white;
-              padding: 3px 10px;
-              border-radius: 8px;
-              font-size: 0.85rem;
-            ">
+            <span class="badge-prioridade prioridade-${tarefa.prioridade || "média"}">
               ${tarefa.prioridade || "média"}
             </span>
           </div>
-          <p class="text-muted mb-1"><small>Lista: ${
-            listaAtual.nome
-          }</small></p>
-          <p class="text-muted mb-0 mt-auto"><small>Criada em: ${new Date(
-            tarefa.createdAt
-          ).toLocaleDateString("pt-BR")}</small></p>
+          <p class="text-muted mb-1"><small>Lista: ${listaAtual.nome}</small></p>
+          <p class="text-muted mb-0 mt-auto">
+            <small>Criada em: ${new Date(tarefa.createdAt).toLocaleDateString("pt-BR")}</small>
+          </p>
         </div>
       </div>
     `;
@@ -181,6 +146,7 @@ function renderTarefas() {
     cardsContainer.appendChild(col);
   });
 }
+
 
 function abrirModalEdicao(tarefa) {
   tarefaEditando = tarefa;

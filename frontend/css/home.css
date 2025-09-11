@@ -12,3 +12,89 @@
   transform: scale(1.02);
   transition: transform 0.2s;
 }
+
+/* Estilo do card */
+.card-custom {
+  background-color: #b7caddff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+/* Badges de status */
+.badge-status {
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+.status-iniciada { background-color: #6c757d; }
+.status-cancelada { background-color: #e47681ff; }
+.status-concluída { background-color: #5dd89fff; }
+
+/* Badges de prioridade */
+.badge-prioridade {
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+.prioridade-baixa { background-color: #adb5bd; }
+.prioridade-média { background-color: #be9d3aff; }
+.prioridade-alta { background-color: #ee9d5aff; }
+.prioridade-urgente { background-color: #9b76e0ff; }
+
+/* Card total */
+.card-total {
+  background-color: #cdd9e4ff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.card-total-num {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Estatísticas gerais */
+.card-stat {
+  flex: 1 1 150px;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card-stat-num {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* === Cores por status === */
+.status-iniciada { 
+  background-color: #6c757d; 
+}
+.status-cancelada { 
+  background-color: #e47681ff; 
+}
+.status-concluída { 
+  background-color: #5dd89fff; 
+}
+
+/* === Cores por prioridade === */
+.prioridade-baixa { 
+  background-color: #adb5bd; 
+}
+.prioridade-média { 
+  background-color: #be9d3aff; 
+}
+.prioridade-alta { 
+  background-color: #ee9d5aff; 
+}
+.prioridade-urgente { 
+  background-color: #9b76e0ff; 
+}

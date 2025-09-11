@@ -1,8 +1,12 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
+  background-image: linear-gradient(to bottom, #f6d9fa, #6d6fe2);
   background-attachment: fixed;
 }
 
@@ -85,15 +89,6 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* === MEDIA QUERIES PARA DRAWER === */
-/* Navbar drawer */
-body {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  background-image: linear-gradient(to bottom, #c9e4ca, #f7f7f7);
-  background-attachment: fixed;
-}
 
 .link-nav {
   color: #007bff;
@@ -149,6 +144,43 @@ body {
 #cards-tarefas {
   margin-bottom: 100px;
 }
+
+/* === Badges base === */
+.badge-status,
+.badge-prioridade {
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* === Status === */
+.status-iniciada {
+  background-color: #6c757d;
+}
+.status-cancelada {
+  background-color: #e47681ff;
+}
+.status-concluída {
+  background-color: #5dd89fff;
+}
+
+/* === Prioridade === */
+.prioridade-baixa {
+  background-color: #adb5bd;
+}
+.prioridade-média {
+  background-color: #be9d3aff;
+}
+.prioridade-alta {
+  background-color: #ee9d5aff;
+}
+.prioridade-urgente {
+  background-color: #9b76e0ff;
+}
+
+
+
 @media (max-width: 991.98px) {
   /* Ícone do drawer */
   .navbar-toggler {

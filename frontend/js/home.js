@@ -52,10 +52,6 @@ async function carregarTarefas(token) {
   const row = document.createElement("div");
   row.className = "row g-3";
 
-  // cores suaves, mesmo tema dos stats
-  const coresStatus = { iniciada: "#6c757d", cancelada: "#dc3545", concluída: "#198754" };
-  const coresPrioridade = { baixa: "#adb5bd", média: "#ffc107", alta: "#fd7e14", urgente: "#6f42c1" };
-
   tarefas.forEach((tarefa) => {
     const id = tarefa._id?.$oid || tarefa._id;
 
@@ -64,33 +60,16 @@ async function carregarTarefas(token) {
     col.setAttribute("data-id", id);
 
     col.innerHTML = `
-      <div style="
-        background-color: #f8f9fa;
-        border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        height: 100%;
-        cursor: pointer;
-      " class="card h-100">
+      <div class="card card-custom h-100">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title mb-2">${tarefa.descricao}</h5>
           <div class="mb-2 d-flex gap-2 flex-wrap">
-            <span class="badge-status" 
-  style="background-color: ${coresStatus[tarefa.status] || "#6c757d"}; 
-         color: white; 
-         padding: 3px 10px; 
-         border-radius: 8px; 
-         font-size: 0.85rem;">
-  ${tarefa.status}
-</span>
-
-<span class="badge-prioridade" 
-  style="background-color: ${coresPrioridade[tarefa.prioridade || "média"] || "#ffc107"}; 
-         color: white; 
-         padding: 3px 10px; 
-         border-radius: 8px; 
-         font-size: 0.85rem;">
-  ${tarefa.prioridade || "média"}
-</span>
+            <span class="badge-status status-${tarefa.status}">
+              ${tarefa.status}
+            </span>
+            <span class="badge-prioridade prioridade-${tarefa.prioridade || "média"}">
+              ${tarefa.prioridade || "média"}
+            </span>
           </div>
           <p class="text-muted mb-1">
             <small>Lista: ${tarefa.listaNome || "Sem lista"}</small>
@@ -118,9 +97,6 @@ async function carregarStats(token) {
 
   const { total, statusStats, prioridadeStats } = await res.json();
 
-  const coresStatus = { iniciada: "#6c757d", cancelada: "#dc3545", concluída: "#198754" };
-  const coresPrioridade = { baixa: "#adb5bd", média: "#ffc107", alta: "#fd7e14", urgente: "#6f42c1" };
-
   const container = document.getElementById("grafico-container");
   if (!container) return;
   container.innerHTML = "";
@@ -129,14 +105,9 @@ async function carregarStats(token) {
   const totalCard = document.createElement("div");
   totalCard.className = "mb-4 text-center";
   totalCard.innerHTML = `
-    <div style="
-      background-color: #f8f9fa; 
-      padding: 20px; 
-      border-radius: 12px; 
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    ">
+    <div class="card-total">
       <h4>Total de Tarefas</h4>
-      <p style="font-size: 2rem; font-weight: bold; margin: 0;">${total}</p>
+      <p class="card-total-num">${total}</p>
     </div>
   `;
   container.appendChild(totalCard);
@@ -152,18 +123,10 @@ async function carregarStats(token) {
 
   Object.entries(statusStats).forEach(([status, valor]) => {
     const card = document.createElement("div");
-    card.style = `
-      flex: 1 1 150px; 
-      background-color: ${coresStatus[status]}; 
-      color: white; 
-      padding: 15px; 
-      border-radius: 12px; 
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    `;
+    card.className = `card-stat status-${status}`;
     card.innerHTML = `
       <h6 class="text-capitalize mb-1">${status}</h6>
-      <p style="font-size: 1.5rem; font-weight: bold; margin: 0;">${valor}</p>
+      <p class="card-stat-num">${valor}</p>
     `;
     rowStatus.appendChild(card);
   });
@@ -180,25 +143,15 @@ async function carregarStats(token) {
 
   Object.entries(prioridadeStats).forEach(([prioridade, valor]) => {
     const card = document.createElement("div");
-    card.style = `
-      flex: 1 1 150px; 
-      background-color: ${coresPrioridade[prioridade]}; 
-      color: white; 
-      padding: 15px; 
-      border-radius: 12px; 
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    `;
+    card.className = `card-stat prioridade-${prioridade}`;
     card.innerHTML = `
       <h6 class="text-capitalize mb-1">${prioridade}</h6>
-      <p style="font-size: 1.5rem; font-weight: bold; margin: 0;">${valor}</p>
+      <p class="card-stat-num">${valor}</p>
     `;
     rowPrioridade.appendChild(card);
   });
   container.appendChild(rowPrioridade);
 }
-
-
 
 // --- MODAL ---
 function abrirModal(tarefa) {
@@ -265,22 +218,27 @@ function atualizarCard(tarefa) {
   const card = col.querySelector(".card");
   card.querySelector(".card-title").textContent = tarefa.descricao;
 
+  // atualizar status
   const statusBadge = card.querySelector(".badge-status");
-  statusBadge.textContent = tarefa.status;
-  statusBadge.className = `badge badge-status bg-${{
-    iniciada: "primary",
-    cancelada: "danger",
-    concluída: "success",
-  }[tarefa.status] || "secondary"}`;
+  if (statusBadge) {
+    statusBadge.textContent = tarefa.status;
 
+    // remove classes antigas de status
+    statusBadge.className = "badge-status"; 
+    if (tarefa.status) {
+      statusBadge.classList.add(`status-${tarefa.status}`);
+    }
+  }
+
+  // atualizar prioridade
   const prioridadeBadge = card.querySelector(".badge-prioridade");
-  prioridadeBadge.textContent = tarefa.prioridade || "média";
-  prioridadeBadge.className = `badge badge-prioridade bg-${
-    {
-      baixa: "secondary",
-      média: "warning",
-      alta: "danger",
-      urgente: "dark",
-    }[tarefa.prioridade || "média"]
-  } ms-1`;
+  if (prioridadeBadge) {
+    prioridadeBadge.textContent = tarefa.prioridade || "média";
+
+    // remove classes antigas de prioridade
+    prioridadeBadge.className = "badge-prioridade";
+    prioridadeBadge.classList.add(
+      `prioridade-${tarefa.prioridade || "média"}`
+    );
+  }
 }
