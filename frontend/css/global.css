@@ -141,6 +141,10 @@ body {
   width: 100%;
 }
 
+.my-radius {
+  border-radius: 12px;
+}
+
 #cards-tarefas {
   margin-bottom: 100px;
 }

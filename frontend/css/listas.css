@@ -26,6 +26,12 @@
   border-radius: 8px;
 }
 
+.tab-button:hover {
+  background-color: #ebcfc2;
+  border: none;
+  
+}
+
 /* Card padrão de tarefa */
 .card-tarefa {
   background-color: #b7caddff;

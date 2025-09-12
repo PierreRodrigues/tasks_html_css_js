@@ -10,6 +10,10 @@ body {
  padding-left: 10px;
 }
 
+input {
+  border-radius: 20px;
+}
+
 .card {
   border: none;
   border-radius: 10px;
@@ -40,6 +44,7 @@ body {
 .btn:hover {
   background-color: rgb(146, 212, 190);
 }
+
 
 @media (max-width: 768px) {
   #logo img {

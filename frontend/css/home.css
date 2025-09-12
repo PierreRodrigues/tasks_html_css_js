@@ -1,10 +1,10 @@
 .btn-save {
-    background-color: rgb(214, 108, 200);
-    color: white;
+  background-color: rgb(214, 108, 200);
+  color: white;
 }
 .btn-save:hover {
-    background-color: rgb(179, 97, 158);
-    color: white;
+  background-color: rgb(179, 97, 158);
+  color: white;
 }
 
 .card:hover {
@@ -13,24 +13,28 @@
   transition: transform 0.2s;
 }
 
-/* Estilo do card */
 .card-custom {
   background-color: #b7caddff;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
 
-/* Badges de status */
 .badge-status {
   color: #fff;
   padding: 3px 10px;
   border-radius: 8px;
   font-size: 0.85rem;
 }
-.status-iniciada { background-color: #6c757d; }
-.status-cancelada { background-color: #e47681ff; }
-.status-concluída { background-color: #5dd89fff; }
+.status-iniciada {
+  background-color: #6c757d;
+}
+.status-cancelada {
+  background-color: #e47681ff;
+}
+.status-concluída {
+  background-color: #5dd89fff;
+}
 
 /* Badges de prioridade */
 .badge-prioridade {
@@ -39,17 +43,25 @@
   border-radius: 8px;
   font-size: 0.85rem;
 }
-.prioridade-baixa { background-color: #adb5bd; }
-.prioridade-média { background-color: #be9d3aff; }
-.prioridade-alta { background-color: #ee9d5aff; }
-.prioridade-urgente { background-color: #9b76e0ff; }
+.prioridade-baixa {
+  background-color: #adb5bd;
+}
+.prioridade-média {
+  background-color: #be9d3aff;
+}
+.prioridade-alta {
+  background-color: #ee9d5aff;
+}
+.prioridade-urgente {
+  background-color: #9b76e0ff;
+}
 
 /* Card total */
 .card-total {
   background-color: #cdd9e4ff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .card-total-num {
@@ -65,7 +77,7 @@
   padding: 15px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .card-stat-num {
@@ -75,26 +87,54 @@
 }
 
 /* === Cores por status === */
-.status-iniciada { 
-  background-color: #6c757d; 
+.status-iniciada {
+  background-color: #6c757d;
 }
-.status-cancelada { 
-  background-color: #e47681ff; 
+.status-cancelada {
+  background-color: #e47681ff;
 }
-.status-concluída { 
-  background-color: #5dd89fff; 
+.status-concluída {
+  background-color: #5dd89fff;
 }
 
 /* === Cores por prioridade === */
-.prioridade-baixa { 
-  background-color: #adb5bd; 
+.prioridade-baixa {
+  background-color: #adb5bd;
 }
-.prioridade-média { 
-  background-color: #be9d3aff; 
+.prioridade-média {
+  background-color: #be9d3aff;
 }
-.prioridade-alta { 
-  background-color: #ee9d5aff; 
+.prioridade-alta {
+  background-color: #ee9d5aff;
 }
-.prioridade-urgente { 
-  background-color: #9b76e0ff; 
+.prioridade-urgente {
+  background-color: #9b76e0ff;
+}
+
+#modal-edicao {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(232, 155, 235, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#modal-edicao2 {
+  background: rgb(203, 163, 240);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+}
+
+#modal-close {
+  position: absolute; 
+  top: 10px; 
+  right: 10px;
 }
