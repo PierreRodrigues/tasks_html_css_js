@@ -18,13 +18,20 @@ document.getElementById("form-cadastro").addEventListener("submit", async (e) =>
     return;
   }
 
+  // 🔒 Validação da senha (mínimo 8 caracteres, 1 letra, 1 número e 1 símbolo)
+  const senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&\-_])[A-Za-z\d@$!%*?&\-_]{8,}$/;
+  if (!senhaRegex.test(senha)) {
+    alert("A senha deve ter no mínimo 8 caracteres, incluindo letra, número e símbolo.");
+    return;
+  }
+
   let foto = "";
 
   if (fotoInput.files.length > 0) {
     const file = fotoInput.files[0];
 
     // Limitar tamanho do arquivo (ex.: 2MB)
-    const maxSize = 2 * 1024 * 1024; 
+    const maxSize = 2 * 1024 * 1024;
     if (file.size > maxSize) {
       alert("A foto deve ter no máximo 2MB.");
       return;
@@ -65,12 +72,41 @@ document.getElementById("form-cadastro").addEventListener("submit", async (e) =>
 // Função para converter arquivo para base64
 function toBase64(file) {
   return new Promise((resolve, reject) => {
+    // 🔎 Verifica tipo de arquivo antes de converter
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Formato de imagem não suportado. Use JPG, PNG ou GIF.");
+      return reject(new Error("Formato de imagem inválido"));
+    }
+
+    // 🔎 Verifica tamanho do arquivo (até 2MB)
+    const maxSize = 2 * 1024 * 1024;
+    if (file.size > maxSize) {
+      alert("A foto deve ter no máximo 2MB.");
+      return reject(new Error("Arquivo muito grande"));
+    }
+
     const reader = new FileReader();
+
+    reader.onload = () => {
+      if (!reader.result) {
+        alert("Erro ao carregar a imagem. Tente novamente.");
+        reject(new Error("Falha ao converter imagem"));
+      } else {
+        resolve(reader.result);
+      }
+    };
+
+    reader.onerror = () => {
+      alert("Erro ao ler a imagem. Verifique o arquivo e tente novamente.");
+      reject(reader.error);
+    };
+
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = err => reject(err);
   });
 }
+
+
 
 // document.getElementById("form-cadastro").addEventListener("submit", async (e) => {
 //     e.preventDefault();

@@ -10,6 +10,15 @@ exports.register = async (req, res) => {
       return res.status(400).json({ error: "Nome, email e senha são obrigatórios" });
     }
 
+    // Validação da senha
+    const senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&\-_])[A-Za-z\d@$!%*?&\-_]{8,}$/;
+    if (!senhaRegex.test(senha)) {
+      return res.status(400).json({
+        error:
+          "A senha deve ter no mínimo 8 caracteres, incluindo letra, número e símbolo.",
+      });
+    }
+
     const hashedPassword = await bcrypt.hash(senha, 10);
 
     const newUser = new User({

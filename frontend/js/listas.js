@@ -75,13 +75,54 @@ async function carregarListas() {
   }
 }
 
+// function criarAba(lista) {
+//   const btn = document.createElement("button");
+//   btn.className = "tab-button";
+//   btn.textContent = lista.nome;
+//   btn.onclick = () => mostrarTarefas(lista);
+//   listaAbas.appendChild(btn);
+// }
+
 function criarAba(lista) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "d-flex align-items-center me-2 mb-2";
+
+  // Botão da lista
   const btn = document.createElement("button");
-  btn.className = "tab-button";
+  btn.className = "tab-button btn btn-outline-primary me-2";
   btn.textContent = lista.nome;
   btn.onclick = () => mostrarTarefas(lista);
-  listaAbas.appendChild(btn);
+
+  // Botão de exclusão
+  const btnDelete = document.createElement("button");
+  btnDelete.className = "btn";
+  btnDelete.innerHTML = '<i class="bi bi-trash"></i>';
+  btnDelete.onclick = async () => {
+    if (confirm(`Deseja excluir a lista "${lista.nome}"?`)) {
+      try {
+        const res = await fetch(`http://localhost:4000/lists/${lista._id}`, {
+          method: "DELETE",
+          headers: { Authorization: "Bearer " + token },
+        });
+        if (res.ok) {
+          wrapper.remove(); // remove o botão da UI
+          document.getElementById("cards-tarefas").innerHTML = ""; // limpa tarefas se estava aberta
+          document.getElementById("nome-lista").textContent = "";
+        } else {
+          alert("Erro ao excluir lista!");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao excluir lista!");
+      }
+    }
+  };
+
+  wrapper.appendChild(btn);
+  wrapper.appendChild(btnDelete);
+  listaAbas.appendChild(wrapper);
 }
+
 
 async function mostrarTarefas(lista) {
   listaAtual = lista;
