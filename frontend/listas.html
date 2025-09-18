@@ -160,57 +160,43 @@
 
     <!-- Modal Edição -->
     <div class="modal fade" id="modalEdicao" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form id="form-edicao-tarefa">
-            <div class="modal-header">
-              <h5 class="modal-title">Editar Tarefa</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <input
-                type="text"
-                id="edit-descricao"
-                class="form-control mb-2"
-              />
-              <select id="edit-status" class="form-select mb-2">
-                <option value="iniciada">Iniciada</option>
-                <option value="concluída">Concluída</option>
-                <option value="cancelada">Cancelada</option>
-              </select>
-              <select id="edit-prioridade" class="form-select mb-2">
-                <option value="baixa">Baixa</option>
-                <option value="média">Média</option>
-                <option value="alta">Alta</option>
-                <option value="urgente">Urgente</option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Salvar</button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                data-bs-dismiss="modal"
-                id="btn-excluir-tarefa"
-              >
-                Excluir
-              </button>
-            </div>
-          </form>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form-edicao-tarefa">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Tarefa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-      </div>
+        <div class="modal-body">
+          <label for="edit-descricao" class="form-label">Descrição:</label>
+          <input type="text" id="edit-descricao" class="form-control mb-2" />
+          <label for="edit-status" class="form-label">Status:</label>
+          <select id="edit-status" class="form-select mb-2">
+            <option value="iniciada">Iniciada</option>
+            <option value="concluída">Concluída</option>
+            <option value="cancelada">Cancelada</option>
+          </select>
+          <label for="edit-prioridade" class="form-label">Prioridade:</label>
+          <select id="edit-prioridade" class="form-select mb-2">
+            <option value="baixa">Baixa</option>
+            <option value="média">Média</option>
+            <option value="alta">Alta</option>
+            <option value="urgente">Urgente</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn-excluir-tarefa">
+            Excluir
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/listas.js">

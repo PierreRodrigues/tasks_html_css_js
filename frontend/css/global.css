@@ -98,7 +98,7 @@ body {
 .link-nav:hover {
   color: #0a6eda;
 }
-.tab-button {
+/* .tab-button {
   background: #eee;
   border: 1px solid #ccc;
   padding: 8px 12px;
@@ -111,7 +111,7 @@ body {
   border-color: #6f42c1;
   background: #6f42c1;
   color: white;
-}
+} */
 
 #tarefas-container {
   display: none;

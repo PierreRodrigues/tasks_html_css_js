@@ -91,13 +91,12 @@ function criarAba(lista) {
   const btn = document.createElement("button");
   btn.className = "tab-button";
   btn.textContent = lista.nome;
-  btn.onclick = () => mostrarTarefas(lista);
   btn.onclick = () => {
     // remove "active" de todos os botões
-    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("activee"));
 
     // adiciona "active" só no botão clicado
-    btn.classList.add("active");
+    btn.classList.add("activee");
 
     // mostra as tarefas da lista
     mostrarTarefas(lista);

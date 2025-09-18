@@ -34,9 +34,16 @@
   background-color: #d0d0d0;
 }
 
-.tab-button.active {
+.tab-button.activee {
   background-color: #9b76e0ff; /* roxo */
   color: white;
+}
+
+.lista-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espaçamento entre botão e delete */
+  margin-bottom: 8px;
 }
 
 /* Card padrão de tarefa */
