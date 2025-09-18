@@ -40,118 +40,141 @@ let tarefaAtual = null;
 
 // --- FUNÇÃO PARA CARREGAR ÚLTIMAS TAREFAS ---
 async function carregarTarefas(token) {
-  const res = await fetch("http://localhost:4000/tasks/last", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) throw new Error("Erro ao buscar tarefas");
-  const tarefas = await res.json();
-
   const listaTarefas = document.getElementById("ultimas-tarefas");
-  listaTarefas.innerHTML = "";
-
-  const row = document.createElement("div");
-  row.className = "row g-3";
-
-  tarefas.forEach((tarefa) => {
-    const id = tarefa._id?.$oid || tarefa._id;
-
-    const col = document.createElement("div");
-    col.className = "col-md-6 col-lg-4";
-    col.setAttribute("data-id", id);
-
-    col.innerHTML = `
-      <div class="card card-custom h-100">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title mb-2">${tarefa.descricao}</h5>
-          <div class="mb-2 d-flex gap-2 flex-wrap">
-            <span class="badge-status status-${tarefa.status}">
-              ${tarefa.status}
-            </span>
-            <span class="badge-prioridade prioridade-${tarefa.prioridade || "média"}">
-              ${tarefa.prioridade || "média"}
-            </span>
-          </div>
-          <p class="text-muted mb-1">
-            <small>Lista: ${tarefa.listaNome || "Sem lista"}</small>
-          </p>
-          <p class="text-muted mb-0 mt-auto">
-            <small>Criada em: ${new Date(tarefa.createdAt).toLocaleDateString("pt-BR")}</small>
-          </p>
-        </div>
+  listaTarefas.innerHTML = `
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Carregando...</span>
       </div>
-    `;
-
-    col.querySelector(".card").onclick = () => abrirModal(tarefa);
-    row.appendChild(col);
-  });
-
-  listaTarefas.appendChild(row);
-}
-
-// --- FUNÇÃO PARA CARREGAR CARDS DE STATUS ---
-async function carregarStats(token) {
-  const res = await fetch("http://localhost:4000/stats", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) throw new Error("Erro ao buscar stats");
-
-  const { total, statusStats, prioridadeStats } = await res.json();
-
-  const container = document.getElementById("grafico-container");
-  if (!container) return;
-  container.innerHTML = "";
-
-  // === CARD TOTAL ===
-  const totalCard = document.createElement("div");
-  totalCard.className = "mb-4 text-center";
-  totalCard.innerHTML = `
-    <div class="card-total">
-      <h4>Total de Tarefas</h4>
-      <p class="card-total-num">${total}</p>
     </div>
   `;
-  container.appendChild(totalCard);
 
-  // === STATUS ===
-  const statusTitle = document.createElement("h5");
-  statusTitle.textContent = "Por Status";
-  statusTitle.className = "mt-4 mb-2";
-  container.appendChild(statusTitle);
+  try {
+    const res = await fetch("http://localhost:4000/tasks/last", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error("Erro ao buscar tarefas");
+    const tarefas = await res.json();
 
-  const rowStatus = document.createElement("div");
-  rowStatus.className = "d-flex flex-wrap gap-3 mb-4";
+    listaTarefas.innerHTML = "";
+    const row = document.createElement("div");
+    row.className = "row g-3";
 
-  Object.entries(statusStats).forEach(([status, valor]) => {
-    const card = document.createElement("div");
-    card.className = `card-stat status-${status}`;
-    card.innerHTML = `
-      <h6 class="text-capitalize mb-1">${status}</h6>
-      <p class="card-stat-num">${valor}</p>
+    tarefas.forEach((tarefa) => {
+      const id = tarefa._id?.$oid || tarefa._id;
+      const col = document.createElement("div");
+      col.className = "col-md-6 col-lg-4";
+      col.setAttribute("data-id", id);
+      col.innerHTML = `
+        <div class="card card-custom h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-2">${tarefa.descricao}</h5>
+            <div class="mb-2 d-flex gap-2 flex-wrap">
+              <span class="badge-status status-${tarefa.status}">
+                ${tarefa.status}
+              </span>
+              <span class="badge-prioridade prioridade-${tarefa.prioridade || "média"}">
+                ${tarefa.prioridade || "média"}
+              </span>
+            </div>
+            <p class="text-muted mb-1">
+              <small>Lista: ${tarefa.listaNome || "Sem lista"}</small>
+            </p>
+            <p class="text-muted mb-0 mt-auto">
+              <small>Criada em: ${new Date(tarefa.createdAt).toLocaleDateString("pt-BR")}</small>
+            </p>
+          </div>
+        </div>
+      `;
+      col.querySelector(".card").onclick = () => abrirModal(tarefa);
+      row.appendChild(col);
+    });
+
+    listaTarefas.appendChild(row);
+  } catch (error) {
+    listaTarefas.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        Erro ao carregar tarefas
+      </div>
     `;
-    rowStatus.appendChild(card);
-  });
-  container.appendChild(rowStatus);
-
-  // === PRIORIDADES ===
-  const prioridadeTitle = document.createElement("h5");
-  prioridadeTitle.textContent = "Por Prioridade";
-  prioridadeTitle.className = "mt-4 mb-2";
-  container.appendChild(prioridadeTitle);
-
-  const rowPrioridade = document.createElement("div");
-  rowPrioridade.className = "d-flex flex-wrap gap-3 mb-4";
-
-  Object.entries(prioridadeStats).forEach(([prioridade, valor]) => {
-    const card = document.createElement("div");
-    card.className = `card-stat prioridade-${prioridade}`;
-    card.innerHTML = `
-      <h6 class="text-capitalize mb-1">${prioridade}</h6>
-      <p class="card-stat-num">${valor}</p>
-    `;
-    rowPrioridade.appendChild(card);
-  });
-  container.appendChild(rowPrioridade);
+  }
 }
+// --- FUNÇÃO PARA CARREGAR CARDS DE STATUS ---
+async function carregarStats(token) {
+  const container = document.getElementById("grafico-container");
+  if (!container) return;
+  container.innerHTML = `
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+    </div>
+  `;
+
+  try {
+    const res = await fetch("http://localhost:4000/stats", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error("Erro ao buscar stats");
+    const { total, statusStats, prioridadeStats } = await res.json();
+
+    container.innerHTML = "";
+
+    // === CARD TOTAL ===
+    const totalCard = document.createElement("div");
+    totalCard.className = "mb-4 text-center";
+    totalCard.innerHTML = `
+      <div class="card-total">
+        <h4>Total de Tarefas</h4>
+        <p class="card-total-num">${total}</p>
+      </div>
+    `;
+    container.appendChild(totalCard);
+
+    // === STATUS ===
+    const statusTitle = document.createElement("h5");
+    statusTitle.textContent = "Por Status";
+    statusTitle.className = "mt-4 mb-2";
+    container.appendChild(statusTitle);
+    const rowStatus = document.createElement("div");
+    rowStatus.className = "d-flex flex-wrap gap-3 mb-4";
+    Object.entries(statusStats).forEach(([status, valor]) => {
+      const card = document.createElement("div");
+      card.className = `card-stat status-${status}`;
+      card.innerHTML = `
+        <h6 class="text-capitalize mb-1">${status}</h6>
+        <p class="card-stat-num">${valor}</p>
+      `;
+      rowStatus.appendChild(card);
+    });
+    container.appendChild(rowStatus);
+
+    // === PRIORIDADES ===
+    const prioridadeTitle = document.createElement("h5");
+    prioridadeTitle.textContent = "Por Prioridade";
+    prioridadeTitle.className = "mt-4 mb-2";
+    container.appendChild(prioridadeTitle);
+    const rowPrioridade = document.createElement("div");
+    rowPrioridade.className = "d-flex flex-wrap gap-3 mb-4";
+    Object.entries(prioridadeStats).forEach(([prioridade, valor]) => {
+      const card = document.createElement("div");
+      card.className = `card-stat prioridade-${prioridade}`;
+      card.innerHTML = `
+        <h6 class="text-capitalize mb-1">${prioridade}</h6>
+        <p class="card-stat-num">${valor}</p>
+      `;
+      rowPrioridade.appendChild(card);
+    });
+    container.appendChild(rowPrioridade);
+  } catch (error) {
+    container.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        Erro ao carregar estatísticas
+      </div>
+    `;
+  }
+}
+
 
 // --- MODAL ---
 function abrirModal(tarefa) {

@@ -37,14 +37,25 @@ input {
 }
 
 .btn {
-  background-color: #f7e1d7;
+  background-color: #f727f7;
+  color: #fff;
   border: none;
 }
 
 .btn:hover {
-  background-color: rgb(146, 212, 190);
+  background-color: rgb(122, 11, 117);
+  color: #fff;
 }
 
+#link-cadastro {
+  text-decoration: none;
+  color: rgb(122, 11, 117);
+}
+
+#link-cadastro:hover {
+  color: #300336;
+  font-weight: 400;
+}
 
 @media (max-width: 768px) {
   #logo img {
