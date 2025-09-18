@@ -106,11 +106,13 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
+
 .tab-button.active {
   border-color: #6f42c1;
   background: #6f42c1;
   color: white;
 }
+
 #tarefas-container {
   display: none;
 }
@@ -160,7 +162,7 @@ body {
 
 /* === Status === */
 .status-iniciada {
-  background-color: #6c757d;
+  background-color: #3d9aec;
 }
 .status-cancelada {
   background-color: #e47681ff;

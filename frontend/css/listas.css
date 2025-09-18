@@ -21,15 +21,22 @@
 }
 
 .tab-button {
-  background-color: #f7e1d7;
-  border: 1 solid #6f42c1;
-  border-radius: 8px;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .tab-button:hover {
-  background-color: #ebcfc2;
-  border: none;
-  
+  background-color: #d0d0d0;
+}
+
+.tab-button.active {
+  background-color: #9b76e0ff; /* roxo */
+  color: white;
 }
 
 /* Card padrão de tarefa */
@@ -48,9 +55,15 @@
   font-size: 0.85rem;
 }
 
-.status-iniciada { background-color: #6c757d; }
-.status-cancelada { background-color: #e47681ff; }
-.status-concluída { background-color: #5dd89fff; }
+.status-iniciada {
+  background-color: #3d9aec;
+}
+.status-cancelada {
+  background-color: #e47681ff;
+}
+.status-concluída {
+  background-color: #5dd89fff;
+}
 
 /* Badges de prioridade */
 .badge-prioridade {
@@ -60,8 +73,16 @@
   font-size: 0.85rem;
 }
 
-.prioridade-baixa { background-color: #adb5bd; }
-.prioridade-média { background-color: #be9d3aff; }
-.prioridade-alta { background-color: #ee9d5aff; }
-.prioridade-urgente { background-color: #9b76e0ff; }
+.prioridade-baixa {
+  background-color: #50ad50;
+}
+.prioridade-média {
+  background-color: #cece4c;
+}
+.prioridade-alta {
+  background-color: #c57021;
+}
+.prioridade-urgente {
+  background-color: #a33333;
+}
 

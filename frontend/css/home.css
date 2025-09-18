@@ -27,7 +27,7 @@
   font-size: 0.85rem;
 }
 .status-iniciada {
-  background-color: #6c757d;
+  background-color: #3d9aec;
 }
 .status-cancelada {
   background-color: #e47681ff;
@@ -44,18 +44,21 @@
   font-size: 0.85rem;
 }
 .prioridade-baixa {
-  background-color: #adb5bd;
+  background-color: #50ad50;
 }
 .prioridade-média {
-  background-color: #be9d3aff;
+  background-color: #cece4c;
 }
 .prioridade-alta {
-  background-color: #ee9d5aff;
+  background-color: #c57021;
 }
 .prioridade-urgente {
-  background-color: #9b76e0ff;
+  background-color: #a33333;
 }
 
+h3 {
+  text-shadow: 2px 2px 0 rgb(211, 98, 173);
+}
 /* Card total */
 .card-total {
   background-color: #cdd9e4ff;
@@ -88,7 +91,7 @@
 
 /* === Cores por status === */
 .status-iniciada {
-  background-color: #6c757d;
+  background-color: #3d9aec;
 }
 .status-cancelada {
   background-color: #e47681ff;
@@ -99,16 +102,16 @@
 
 /* === Cores por prioridade === */
 .prioridade-baixa {
-  background-color: #adb5bd;
+  background-color: #50ad50;
 }
 .prioridade-média {
-  background-color: #be9d3aff;
+  background-color: #cece4c;
 }
 .prioridade-alta {
-  background-color: #ee9d5aff;
+  background-color: #c57021;
 }
 .prioridade-urgente {
-  background-color: #9b76e0ff;
+  background-color: #a33333;
 }
 
 #modal-edicao {

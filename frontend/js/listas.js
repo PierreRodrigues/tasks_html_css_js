@@ -89,9 +89,19 @@ function criarAba(lista) {
 
   // Botão da lista
   const btn = document.createElement("button");
-  btn.className = "tab-button btn btn-outline-primary me-2";
+  btn.className = "tab-button";
   btn.textContent = lista.nome;
   btn.onclick = () => mostrarTarefas(lista);
+  btn.onclick = () => {
+    // remove "active" de todos os botões
+    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+
+    // adiciona "active" só no botão clicado
+    btn.classList.add("active");
+
+    // mostra as tarefas da lista
+    mostrarTarefas(lista);
+  };
 
   // Botão de exclusão
   const btnDelete = document.createElement("button");
