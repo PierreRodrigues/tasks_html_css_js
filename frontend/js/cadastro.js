@@ -106,6 +106,26 @@ function toBase64(file) {
   });
 }
 
+const senhaInput = document.getElementById("senhaCadastro");
+const senhaComprimento = document.getElementById("senha-comprimento");
+const senhaLetra = document.getElementById("senha-letra");
+const senhaNumero = document.getElementById("senha-numero");
+const senhaSimbolo = document.getElementById("senha-simbolo");
+
+senhaInput.addEventListener("input", () => {
+  const senha = senhaInput.value;
+  const senhaRegexComprimento = senha.length >= 8;
+  const senhaRegexLetra = /[A-Za-z]/.test(senha);
+  const senhaRegexNumero = /\d/.test(senha);
+  const senhaRegexSimbolo = /[@$!%*?&\-_]/.test(senha);
+
+  senhaComprimento.className = senhaRegexComprimento ? "text-success" : "text-muted";
+  senhaLetra.className = senhaRegexLetra ? "text-success" : "text-muted";
+  senhaNumero.className = senhaRegexNumero ? "text-success" : "text-muted";
+  senhaSimbolo.className = senhaRegexSimbolo ? "text-success" : "text-muted";
+});
+
+
 
 
 // document.getElementById("form-cadastro").addEventListener("submit", async (e) => {
