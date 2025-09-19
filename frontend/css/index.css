@@ -37,13 +37,13 @@ input {
 }
 
 .btn {
-  background-color: #f727f7;
+  background-color: #9b76e0ff;
   color: #fff;
   border: none;
 }
 
 .btn:hover {
-  background-color: rgb(122, 11, 117);
+  background-color: rgb(92, 5, 87);
   color: #fff;
 }
 
